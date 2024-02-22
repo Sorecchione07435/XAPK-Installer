@@ -23,10 +23,7 @@ Public Class DeviceConnection
 
             server.StartServer(Application.StartupPath & "\platform-tools\adb.exe", restartServerIfNewer:=False)
 
-            ' Ottieni una lista dei dispositivi collegati
             Dim devices = client.GetDevices()
-
-            ' Verifica se ci sono dispositivi collegati
             If devices IsNot Nothing AndAlso devices.Count > 0 Then
 
                 Try
@@ -151,10 +148,8 @@ Public Class DeviceConnection
 
     End Sub
     Private Function GetProcessorName(cpuinfo As String) As String
-        ' Dividi il risultato per righe
         Dim lines = cpuinfo.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
 
-        ' Cerca la riga che contiene il nome del processore
         For Each line In lines
             If line.StartsWith("Processor") Then
                 ' Estrai il nome del processore e rimuovi eventuali spazi iniziali e finali
@@ -202,13 +197,12 @@ Public Class DeviceConnection
                     Return Math.Round(ramKB / 1024)
                 Else
                     ' Se la conversione non riesce, restituisci 0 o gestisci l'errore in base alla tua logica
-                    Return 0 ' o gestisci l'errore in un altro modo
+                    Return 0 
                 End If
             End If
         Next
 
-        ' Se non viene trovata la quantità di RAM, restituisci 0 o gestisci l'errore in base alla tua logica
-        Return 0 ' o gestisci l'errore in un altro modo
+        Return 0 
     End Function
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -235,9 +229,5 @@ Public Class DeviceConnection
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         MsgBox(My.Application.Info.AssemblyName & vbCrLf & My.Application.Info.Version.ToString & vbCrLf & My.Application.Info.Copyright)
-    End Sub
-
-    Private Sub AndroidVersionLbl_Click(sender As Object, e As EventArgs) Handles AndroidVersionLbl.Click
-
     End Sub
 End Class
